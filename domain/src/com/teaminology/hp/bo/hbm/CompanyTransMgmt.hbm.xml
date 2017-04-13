@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="CompanyTransMgmt" table="company_trans_mgmt">
+        <id name="CompanyTransMgmtId" column="company_trans_mgmt_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property name="companyId" column="company_id" type="java.lang.Integer"/>
+        <property name="userId" column="user_id" type="java.lang.Integer"/>
+        <property name="isExternal" column="is_external" type="java.lang.String"/>
+        <property name="isActive" column="is_active" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

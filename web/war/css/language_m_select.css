@@ -1,0 +1,61 @@
+.ui-multiselect {
+	font-size: 12px;
+	padding: 2px 0 2px 4px;
+	text-align: left;
+	width: 134px !important;
+	color: #0e94bc;
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border: medium none;
+}
+.ui-multiselect-checkboxes select:focus, .ui-multiselect-checkboxes input[type="file"]:focus,
+	.ui-multiselect-checkboxes input[type="radio"]:focus,
+	.ui-multiselect-checkboxes input[type="checkbox"]:focus,
+	.ui-multicolumnselect-checkboxes select:focus,
+	.ui-multicolumnselect-checkboxes input[type="file"]:focus,
+	.ui-multicolumnselect-checkboxes input[type="radio"]:focus,
+	.ui-multicolumnselect-checkboxes input[type="checkbox"]:focus {
+	outline: none;
+}
+.ui-multiselect-checkboxes .ui-state-hover, .ui-multiselect-checkboxes .ui-state-focus,
+	.ui-multicolumnselect-checkboxes .ui-state-hover,
+	.ui-multicolumnselect-checkboxes .ui-state-focus {
+	background: none repeat scroll 0 0 #0e94bc!importatnt;
+	border-color: #3399FF!importatnt;
+	color: #0e94bc;
+	font-size: 12px;
+	font-weight: normal;
+}
+.ui-widget-header.ui-multiselect-header {
+	font-weight: normal;
+}
+.ui-multiselect-checkboxes .ui-state-active {
+	color: #0e94bc;
+	border-color: #5EC4FF;
+	font-size: 12px;
+	font-weight: normal;
+}
+.ui-multiselect-checkboxes .ui-state-active.ui-state-hover {
+	color: white;
+}
+.ui-multicolumnselect-menu .ui-widget-header, .ui-multiselect-menu .ui-widget-header
+	{
+	background: none repeat scroll 0 0 #0e94bc;
+	border-color: #0e94bc;
+}
+.ui-multiselect-menu.ui-widget-content.ui-corner-all.lang {
+	width: 175px !important;
+}
+.ui-state-default {
+	border: none !important;
+	background-color: #fff !important;
+	background: none !important;
+	color: #1c94c4 !important;
+}
+.ui-multiselect span.ui-icon.ui-icon-triangle-2-n-s {
+	background-image: url("../css/images/ui-icons_228ef1_256x240.png");
+	background-position: -67px -16px;
+	background-repeat: no-repeat;
+}
+.ui-state-hover span.ui-icon.ui-icon-triangle-2-n-s {
+	background-position: -67px -16px;
+}

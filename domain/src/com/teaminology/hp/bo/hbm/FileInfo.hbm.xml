@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="FileInfo" table="file_info">
+        <id column="file_info_id" name="fileInfoId"
+            type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="file_id" name="fileId" type="java.lang.Integer"/>
+        <property column="file_name" name="fileName" type="java.lang.String"/>
+        <property column="status" name="status" type="java.lang.String"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <property column="created_by" name="createdBy" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="activity_type" name="activityType" type="java.lang.String"/>
+        <property column="username" name="userName" type="java.lang.String"/>
+        <property column="accept_time" name="acceptTime" type="java.lang.String"/>
+        <property column="encoding_type" name="encodingType" type="java.lang.String"/>
+        <property column="document_format" name="documentForm" type="java.lang.String"/>
+        <property column="place_holder" name="placeHolder" type="java.lang.String"/>
+        <property column="exact_match" name="exactMatch" type="java.lang.Integer"/>
+        <property column="fuzzy_match" name="fuzzyMatch" type="java.lang.Integer"/>
+        <property column="no_match" name="noMatch" type="java.lang.Integer"/>
+        <property column="in_context_match" name="inContextMatch" type="java.lang.Integer"/>
+        <property column="edit_all" name="editAll" type="java.lang.String"/>
+        <property column="gs_tm_profile_id" name="gsTmProfileId" type="java.lang.Integer"/>
+        <property column="gs_tm_profile_name" name="gsTmProfileName" type="java.lang.String"/>
+        <property column="gs_termbase" name="gsTermbase" type="java.lang.String"/>
+        <property column="xml_version" name="xmlVersion" type="java.lang.String"/>
+        <property column="xliff_version" name="xliffVersion" type="java.lang.String"/>
+        <property column="phase_name" name="phanesName" type="java.lang.String"/>
+        <property column="process_name" name="processName" type="java.lang.String"/>
+        <many-to-one class="com.teaminology.hp.bo.lookup.Language"
+                     column="source_lang" lazy="false" name="sourceLang" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.lookup.Language"
+                     column="target_lang" lazy="false" name="targetLang" not-null="false"/>
+        <property column="work_flow_id" name="workFlowId" type="java.lang.String"/>
+        <property column="task_id" name="taskId" type="java.lang.String"/>
+        <property column="job_id" name="jobId" type="java.lang.String"/>
+        <property column="jobname" name="jobName" type="java.lang.String"/>
+        <property column="taskname" name="taksName" type="java.lang.String"/>
+        <property column="log_file_url" name="logFileUrl" type="java.lang.String"/>
+        <property column="export_log_url" name="exportLog" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

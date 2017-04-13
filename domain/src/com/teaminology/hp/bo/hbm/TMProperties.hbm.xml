@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TMProperties" table="tm_properties">
+        <id column="tm_properties_id" name="tmPropertiesId"
+            type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="tm_profile_info_id" name="tmProfileId" type="java.lang.Integer"/>
+        <property column="type" name="type" type="java.lang.String"/>
+        <property column="description" name="description" type="java.lang.String"/>
+        <property column="is_tu" name="isTu" type="java.lang.String"/>
+        <property column="created_by" name="createdBy" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="prop_ref" name="propRef" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

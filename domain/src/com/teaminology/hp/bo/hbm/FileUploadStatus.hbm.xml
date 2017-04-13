@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="FileUploadStatus" table="file_upload_status">
+        <id name="fileUploadStatusId" column="file_upload_status_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+
+        <property name="fileName" column="file_name" type="java.lang.String"/>
+        <property name="fileUrl" column="file_url" type="java.lang.String"/>
+        <property name="startTime" column="start_time" type="java.util.Date"/>
+        <property name="endTime" column="end_time" type="java.util.Date"/>
+        <property name="fileStatus" column="file_status" type="java.lang.String"/>
+        <property name="totalRecords" column="total_records" type="java.lang.Integer"/>
+        <property name="proccesedPercentage" column="processed_percentage" type="java.lang.Integer"/>
+        <property name="fileType" column="file_type" type="java.lang.String"/>
+        <property name="createdBy" column="created_by" type="java.lang.Integer"/>
+        <property name="fileLogUrl" column="file_log_url" type="java.lang.String"/>
+        <property name="propRef" column="prop_ref" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

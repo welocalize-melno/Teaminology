@@ -1,0 +1,9 @@
+{
+	"termsDebatedPerYear" : [
+					{ "label":"2007" , "value":0 },
+					{ "label":"2008" , "value":3750 },
+					{ "label":"2009" , "value":7500 },
+					{ "label":"2010" , "value":11250 },
+					{ "label":"2011" , "value":15000 }
+				]
+}

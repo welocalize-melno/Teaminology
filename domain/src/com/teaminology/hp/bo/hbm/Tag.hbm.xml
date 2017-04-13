@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="Tag" table="tag">
+        <id column="tag_id" name="tagId"
+            type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="tag_name" name="tagName" type="java.lang.String"/>
+        <property column="tag_value" name="tagValue" type="java.lang.String"/>
+        <property column="is_source" name="isSource" type="java.lang.String"/>
+        <set cascade="all" inverse="true" lazy="false" name="attribute" sort="unsorted">
+            <key column="attribute_id"/>
+            <one-to-many class="com.teaminology.hp.bo.Attributes"/>
+        </set>
+      <many-to-one class="com.teaminology.hp.bo.GlobalsightTermInfo"
+                     column="gs_id" lazy="false" name="globalsightTermInfo" not-null="false"/> 
+        <property column="sort_order" name="sortOrder" type="java.lang.Integer"/>
+
+    </class>
+</hibernate-mapping>
