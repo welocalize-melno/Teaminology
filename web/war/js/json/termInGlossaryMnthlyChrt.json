@@ -1,0 +1,9 @@
+{
+	"termsPerMonth" : [
+					{ "label":"Nov" , "value":14400 },
+					{ "label":"Dec" , "value":19600 },
+					{ "label":"Jan" , "value":24000 },
+					{ "label":"Feb" , "value":15700 },
+					{ "label":"Mar" , "value":15700 }
+				]
+}

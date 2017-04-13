@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo.lookup">
+
+    <class name="VoteConfig" table="vote_config">
+        <id name="voteConfigId" column="vote_config_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+
+        <property name="votingPeriod" column="voting_period" type="java.lang.Integer"/>
+        <property name="votesPerUser" column="votes_per_user" type="java.lang.Integer"/>
+        <property name="votingThreshold" column="voting_threshold" type="java.lang.Integer"/>
+        <property name="createdBy" column="created_by" type="java.lang.Integer"/>
+        <property name="createDate" column="create_date" type="java.util.Date"/>
+        <property name="updatedBy" column="updated_by" type="java.lang.Integer"/>
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="isActive" column="is_active" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+ <class name="User" table="user">
+  <id column="user_id" name="userId" type="java.lang.Integer">
+   <generator class="native"/>
+  </id>
+  <property column="user_name" generated="never" lazy="false"
+   name="userName" type="java.lang.String" unique="true"/>
+  <property column="password" generated="never" lazy="false"
+   name="password" type="java.lang.String"/>
+  <property column="first_name" generated="never" lazy="false"
+   name="firstName" type="java.lang.String"/>
+  <property column="last_name" generated="never" lazy="false"
+   name="lastName" type="java.lang.String"/>
+  <property column="email_id" generated="never" lazy="false"
+   name="emailId" type="java.lang.String"/>
+  <property column="is_active" generated="never" lazy="false"
+   name="isActive" type="java.lang.String"/>
+  <property column="create_time" generated="never" lazy="false"
+   name="createTime" type="java.util.Date"/>
+  <property column="created_by" generated="never" lazy="false"
+   name="createdBy" type="java.lang.Integer"/>
+  <property column="updated_by" generated="never" lazy="false"
+   name="updatedBy" type="java.lang.Integer"/>
+  <property column="update_date" generated="never" lazy="false"
+   name="updateDate" type="java.util.Date"/>
+  <property column="last_login_time" generated="never" lazy="false"
+   name="lastLoginTime" type="java.util.Date"/>
+  <property column="wrong_pwd_entries" generated="never" lazy="false"
+   name="wrongPwdEntries" type="java.lang.Integer"/>
+  <property column="photo_path" generated="never" lazy="false"
+   name="photoPath" type="java.lang.String"/>
+  <property column="is_term_request" generated="never" lazy="false"
+   name="isTermRequest" type="java.lang.Boolean"/>
+  <property column="domain_id" generated="never" lazy="false"
+   name="userDomainId" type="java.lang.Integer"/>
+  <property column="term_request_count" generated="never" lazy="false"
+   name="termRequestCount" type="java.lang.Integer"/>
+  <!-- <property name="companyId" column="company_id" type="java.lang.Integer"  /> -->
+  <set inverse="true" lazy="false" name="userLanguages" sort="unsorted">
+   <key column="user_id"/>
+   <one-to-many class="UserLanguages"/>
+  </set>
+  <set inverse="true" lazy="false" name="userRole" sort="unsorted">
+   <key column="user_id"/>
+   <one-to-many class="UserRole"/>
+  </set>
+  <many-to-one cascade="all" 
+  class="com.teaminology.hp.bo.lookup.Domain"
+   column="domain_id" lazy="false" name="domain" not-null="false" insert="false" update="false"/>
+  <many-to-one cascade="all"
+   class="com.teaminology.hp.bo.lookup.Company" column="company_id"
+   lazy="false" name="company" not-null="false"/>
+  <set inverse="true" lazy="false" name="companyTransMgmt" sort="unsorted">
+   <key column="user_id"/>
+   <one-to-many class="CompanyTransMgmt"/>
+  </set>
+ </class>
+</hibernate-mapping>

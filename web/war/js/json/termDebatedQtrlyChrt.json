@@ -1,0 +1,9 @@
+{
+	"termsDebatedPerQrtr" : [
+					{ "label":"Q1-2011" , "value":5000 },
+					{ "label":"Q2-2011" , "value":3750 },
+					{ "label":"Q3-2011" , "value":2500 },
+					{ "label":"Q4-2011" , "value":9250 },
+					{ "label":"Q1-2012" , "value":13000 }
+				]
+}
