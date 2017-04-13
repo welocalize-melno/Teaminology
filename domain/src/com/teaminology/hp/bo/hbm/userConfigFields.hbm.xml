@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="com.teaminology.hp.bo.UserConfigFields" table="user_configured_fields" dynamic-update="true" dynamic-insert="true">
+        <id name="id" column="id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+      
+        <many-to-one class="com.teaminology.hp.bo.User"
+                     column="user_id" lazy="false" name="user" not-null="false"/>
+        <property name="fieldId" column="field_id"/>
+        <property name="isActive" column="is_active" />
+        <property name="createdDate" column="created_date" />
+        <property name="updatedDate" column="updated_date" />
+        <property name="deletedDate" column="deleted_date" />
+        
+        
+    </class>
+</hibernate-mapping>

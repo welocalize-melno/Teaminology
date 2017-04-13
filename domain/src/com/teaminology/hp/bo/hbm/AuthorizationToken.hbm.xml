@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="AuthorizationToken" table="authorization_token" dynamic-update="true">
+        <id name="tokenId" column="token_Id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="authToken" column="token" type="java.lang.String"/>
+        <property name="createdDate" column="created_date" />
+        <property name="deletedDate" column="deleted_date" />
+    </class>
+</hibernate-mapping>

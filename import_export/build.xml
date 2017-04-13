@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build script that outputs a JAR file for Contact Match Scripts.
+
+@author
+-->
+
+<project name="TeaminologyImportExport" basedir="." default="build">
+
+    <property name="BuildDir" location="build"/>
+    <property name="TEAMINOLOGY_LIB_PATH" location="../lib/"/>
+    <property name="src" location="src"/>
+    <property name="config" location="config"/>
+
+    <property name="out" location="${BuildDir}/classes"/>
+    <property name="JarFile" location="${BuildDir}/import-export.jar"/>
+    <property name="lib.target" location="${BuildDir}/lib"/>
+    <property name="conf.target" location="${BuildDir}/conf"/>
+
+    <filelist id="teaminology.common.lib" dir="${TEAMINOLOGY_LIB_PATH}">
+        <file name="commons-codec.jar"/>
+        <file name="commons-dbcp-1.4.jar"/>
+        <file name="commons-logging-1.1.1.jar"/>
+        <file name="commons-pool-1.6.jar"/>
+        <file name="jetty-continuation-8.1.1.v20120215.jar"/>
+        <file name="jetty-http-8.1.1.v20120215.jar"/>
+        <file name="jetty-io-8.1.1.v20120215.jar"/>
+        <file name="jetty-security-8.1.1.v20120215.jar"/>
+        <file name="jetty-server-8.1.1.v20120215.jar"/>
+        <file name="jetty-servlet-8.1.1.v20120215.jar"/>
+        <file name="jetty-servlet-api-3.0.jar"/>
+        <file name="jetty-util-8.1.1.v20120215.jar"/>
+        <file name="log4j.jar"/>
+        <file name="mysql-connector-java-5.1.6.jar"/>
+        <file name="spring-orm-3.2.0.RELEASE.jar"/>
+        <file name="jta-1.1.jar"/>
+        <file name="dom4j-1.6.1.jar"/>
+        <file name="com.springsource.org.apache.commons.collections-3.2.1.jar"/>
+        <file name="cglib-2.2.jar"/>
+        <file name="hibernate-3.2.0.ga.jar"/>
+        <!--<file name="spring-asm-3.1.4.RELEASE.jar"/>-->
+        <file name="spring-tx-3.2.0.RELEASE.jar"/>
+        <file name="spring-beans-3.2.0.RELEASE.jar"/>
+        <file name="spring-core-3.2.0.RELEASE.jar"/>
+        <file name="asm-3.3.jar"/>
+        <file name="w3c-dom.jar"/>
+        <file name="antlr-2.7.7.jar"/>
+        <file name="com.springsource.com.sun.syndication-1.0.0.jar"/>
+        <file name="commons-fileupload-1.2.1.jar"/>
+        <file name="c3p0-0.9.1-pre11.jar"/>
+        <file name="gson-1.4.jar"/>
+        <file name="axis.jar"/>
+        <file name="javax.wsdl_1.6.2.v201012040545.jar"/>
+        <file name="jaxrpc.jar"/>
+        <file name="slf4j-api-1.7.2.jar"/>
+        <file name="org.apache.commons.logging_1.0.4.v201101211617.jar"/>
+        <file name="commons-discovery-0.2.jar"/>
+        <file name="plexus-utils-2.1.jar"/>
+    	<file name="solr-solrj-4.7.2.jar"/>
+    	<file name="httpclient-4.3.1.jar"/>
+    	<file name="solr-core-4.7.2.jar"/>
+    	<file name="httpcore-4.3.jar"/>
+    	<file name="httpmime-4.3.1.jar"/>
+    	<file name="noggit-0.5.jar"/>
+    	<file name="jcl-over-slf4j-1.6.6.jar"/>
+    	<file name="commons-io-2.1.jar"/>
+    </filelist>
+
+    <target name="copy-lib" description="- copies lib files to BuildDir/lib directory">
+        <copy todir="${lib.target}">
+            <filelist refid="teaminology.common.lib"/>
+        </copy>
+    </target>
+
+    <target name="copy-conf" description="- copies configuration files to BUILD_TARGET/conf directory">
+        <copy todir="${conf.target}">
+            <fileset dir="${config}" excludes="*.*.local*,*.txt"/>
+        </copy>
+        <copy todir="${BuildDir}" file="start_import_export.sh"/>
+        <copy todir="${BuildDir}" file="stop_import_export.sh"/>
+    </target>
+
+    <target name="_clean">
+        <delete dir="${BuildDir}"/>
+    </target>
+
+    <target name="_init">
+        <mkdir dir="${BuildDir}"/>
+        <mkdir dir="${out}"/>
+    </target>
+
+    <target name="_compile" depends="_init">
+        <echo>Compiling...</echo>
+        <echo>Using java ${javahome}</echo>
+
+        <path id="TeaminologyImportExport.classpath">
+            <pathelement location="{out}"/>
+            <filelist refid="teaminology.common.lib"/>
+        </path>
+
+        <javac
+                srcdir="${src}"
+                destdir="${out}"
+                debug="on"
+                executable="${javahome}/bin/javac"
+                >
+            <classpath refid="TeaminologyImportExport.classpath"/>
+        </javac>
+        <copy todir="${out}">
+            <fileset dir="${src}" includes="*.xml"/>
+        </copy>
+    </target>
+
+    <target name="_jar" depends="_compile">
+        <echo>Creating jar...</echo>
+        <jar
+                destfile="${JarFile}"
+                basedir="${out}"
+                excludes="**/*.java"
+                />
+    </target>
+
+    <target name="build" depends="_clean, _jar, copy-lib, copy-conf">
+        <delete dir="${out}"/>
+    </target>
+</project>

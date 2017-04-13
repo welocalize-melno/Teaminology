@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://192.168.1.118:3306/teaminology_21012016</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.connection.password">Mfiospi#0214</property>
+  <!-- <property name="hibernate.connection.pool_size">10</property>-->
+  <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="hibernate.connection.autocommit">true</property>
+  <property name="testConnectionOnCheckin">false</property>
+  <property name="testConnectionOnCheckout">true</property>
+  <property name="preferredTestQuery">select 1</property>
+  <!-- <property name="hibernate.cache.use_second_level_cache">false</property> 
+ <property name="hibernate.cache.use_query_cache">false</property> 
+  C3P0 connectin pool setting start here -->
+  <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+  <property name="hibernate.c3p0.acquire_increment">1</property>
+  <property name="hibernate.c3p0.idle_test_period">9000</property>
+  <property name="hibernate.c3p0.max_size">20</property>
+  <property name="hibernate.c3p0.max_statements">0</property>
+  <property name="hibernate.c3p0.min_size">2</property>
+  <property name="hibernate.c3p0.timeout">18000</property>
+  <property name="hibernate.c3p0.validate">false</property>
+  <!-- C3P0 connectin pool setting end here 
+ Mapping files -->
+  <mapping resource="TmProfileBo.hbm.xml"/>
+  <mapping resource="FileUploadStatusImp.hbm.xml"/>
+  <mapping resource="Company.hbm.xml"/>
+  <mapping resource="ContentType.hbm.xml"/>
+  <mapping resource="Language.hbm.xml"/>
+  <mapping resource="ProductGroup.hbm.xml"/>
+  <mapping resource="Domain.hbm.xml"/>
+  <mapping resource="TMProperties.hbm.xml"/>
+  <mapping resource="FileInfo.hbm.xml"/>
+  <mapping resource="TermInformation.hbm.xml"/>
+  <mapping resource="TermTranslation.hbm.xml"/>
+  <mapping resource="Tag.hbm.xml"/>
+  <mapping resource="Attributes.hbm.xml"/>
+  <mapping resource="GlobalsightTermInfo.hbm.xml"/>
+  <mapping resource="TempTmProfileBo.hbm.xml"/>
+  <mapping resource="PartsOfSpeech.hbm.xml"/>
+  <mapping resource="Category.hbm.xml"/>
+  <mapping resource="Status.hbm.xml"/>
+  <mapping resource="TempTMProperties.hbm.xml"/>
+  <mapping resource="DeprecatedTermInformation.hbm.xml"/>
+  <mapping resource="userConfigFields.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

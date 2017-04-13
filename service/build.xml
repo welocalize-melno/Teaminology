@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build that outputs a JAR file for Teaminology Service Tier containing service layer objects.
+
+-->
+
+<project name="TeaminologyService" basedir="." default="build">
+
+	<property name="BuildDir" value="build" />
+	<property name="TEAMINOLOGY_LIB_PATH" value="../lib" />
+	<property name="src" value="src" />
+	<property name="out" value="${BuildDir}/classes" />
+	<property name="JarFile" value="${BuildDir}/teaminology-service.jar" />
+
+	<property name="TeaminologyDomainObject.location" value="../domain" />
+	<property name="TeaminologyDomainObject.Src" value="${TeaminologyDomainObject.location}/src" />
+	<property name="TeaminologyDomainObject.JarFile" value="../domain/build/teaminology-domainobject.jar" />
+
+	<property name="TeaminologyDAO.location" value="../dao" />
+	<property name="TeaminologyDAO.Src" value="${TeaminologyDAO.location}/src" />
+	<property name="TeaminologyDAO.JarFile" value="../dao/build/teaminology-dao.jar" />
+
+
+	<path id="project.classpath">
+		<pathelement location="${TeaminologyDAO.JarFile}" />
+		<pathelement location="${TeaminologyDomainObject.JarFile}" />
+		<pathelement location="${TeaminologyGCCalc.JarFile}" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-tx-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-test-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-orm-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-jdbc-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-expression-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-core-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-context-support-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-context-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-beans-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-aspects-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-aop-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-jms-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-instrument-3.2.0.RELEASE.jar" />
+		<!--		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-asm-3.1.4.RELEASE.jar"/>-->
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/hibernate3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jsr250-api-1.0.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jbossall-client.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/aspectjrt-1.6.8.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/aspectjweaver-1.5.4.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/cglib-2.2.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/asm-3.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/guava-r03.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/gwt-user.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/CalcEngineClient.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/mail.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jodd-3.4.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/log4j.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/ostermillerutils_1_07_00.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jxl.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/axis.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jaxrpc.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/plexus-utils-2.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/com.springsource.com.sun.syndication-1.0.0.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/gson-1.4.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/solr-solrj-4.7.2.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/httpmime-4.3.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/httpclient-4.3.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/httpcore-4.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/noggit-0.5.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/servlet-api-2.5.jar" />
+		<pathelement location="{out}" />
+
+	</path>
+
+	<target name="clean">
+		<delete dir="${BuildDir}" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${BuildDir}" />
+		<mkdir dir="${out}" />
+	</target>
+
+	<target name="compile">
+		<echo>Compiling...</echo>
+		<javac srcdir="${src}" destdir="${out}" debug="on" includeantruntime="false">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="jar">
+		<echo>Creating jar...</echo>
+		<jar destfile="${JarFile}" basedir="${out}" excludes="**/*.java" />
+	</target>
+
+	<target name="build">
+		<antcall target="clean" />
+		<antcall target="init" />
+		<antcall target="compile" />
+		<antcall target="jar" />
+	</target>
+</project>

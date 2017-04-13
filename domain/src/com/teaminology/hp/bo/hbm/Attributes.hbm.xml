@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="Attributes" table="attributes">
+        <id column="attribute_id" name="attributeId"
+            type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="attribute_name" name="attributeName" type="java.lang.String"/>
+        <property column="attribute_value" name="attributeValue" type="java.lang.String"/>
+        <many-to-one class="com.teaminology.hp.bo.Tag"
+                     column="tag_id" lazy="false" name="tag" not-null="false"/>
+    </class>
+</hibernate-mapping>

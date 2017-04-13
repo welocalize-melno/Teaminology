@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="DeprecatedTermInformation" table="deprecated_term_info">
+        <id column="deprecated_term_info_id" name="deprecatedTermInfoId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="deprecated_source" name="deprecatedSource" type="java.lang.String"/>
+        <property column="deprecated_target" name="deprecatedTarget" type="java.lang.String"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="created_by" name="createdBy" type="java.lang.Integer"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <many-to-one class="com.teaminology.hp.bo.TermInformation"
+                     column="term_id" lazy="false" name="termInfo" not-null="false"/>
+        <many-to-one name="deprecatedLangId" class="com.teaminology.hp.bo.lookup.Language"
+                     column="deprecated_lang_id" lazy="false" not-null="false"></many-to-one>
+    </class>
+</hibernate-mapping>

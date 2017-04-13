@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build script that outputs a WAR file for Teaminology Web application.
+
+-->
+
+<project name="TeaminologyWeb" basedir="." default="help">
+
+	<property file="local.properties" />
+
+	<property name="BuildDir" value="build" />
+
+	<property name="TEAMINOLOGY_LIB_PATH" value="../lib" />
+
+
+	<property name="src" value="src" />
+	<property name="out" value="${BuildDir}/classes" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="WarFile" value="${BuildDir}/TeaminologyWeb.war" />
+
+	<property name="web.src" value="war" />
+
+	<property name="config.src" value="conf" />
+	<property name="config.tgt" value="${BuildDir}/config" />
+	<property name="web.xml.template" value="${config.src}/web.xml" />
+	<property name="web.xml" value="${config.tgt}/web.xml" />
+
+
+	<property name="Local.Deploy.Ear.Dir" value="${LOCAL_DEPLOY_LOCATION}/TeaminologyEar.ear" />
+	<property name="Local.Deploy.TeaminologyWeb.War.Dir" value="${Local.Deploy.Ear.Dir}/TeaminologyWeb.war" />
+	<property name="Local.Deploy.TeaminologyWeb.War.Servlet.Dir" value="${Local.Deploy.TeaminologyWeb.War.Dir}/WEB-INF/classes" />
+	<property name="Local.Deploy.TeaminologyWeb.War.Lib.Dir" value="${Local.Deploy.TeaminologyWeb.War.Dir}/WEB-INF/lib" />
+
+	<property name="TeaminologyDomainObject.location" value="../domain" />
+	<property name="TeaminologyDomainObject.Src" value="${TeaminologyDomainObject.location}/src" />
+	<property name="TeaminologyDomainObject.JarFile" value="../domain/build/teaminology-domainobject.jar" />
+
+	<property name="TeaminologyDAO.location" value="../dao" />
+	<property name="TeaminologyDAO.Src" value="${TeaminologyDAO.location}/src" />
+	<property name="TeaminologyDAO.JarFile" value="../dao/build/teaminology-dao.jar" />
+
+	<property name="TeaminologyService.location" value="../service" />
+	<property name="TeaminologyService.Src" value="${TeaminologyService.location}/src" />
+	<property name="TeaminologyService.JarFile" value="../service/build/teaminology-service.jar" />
+
+	<property name="standard.jar" value="${TEAMINOLOGY_LIB_PATH}/standard.jar" />
+	<property name="lucene-core-4.0.0.jar" value="${TEAMINOLOGY_LIB_PATH}/lucene-core-4.0.0.jar" />
+	<property name="lucene-analyzers-common-4.0.0.jar" value="${TEAMINOLOGY_LIB_PATH}/lucene-analyzers-common-4.0.0.jar" />
+	<property name="lucene-queryparser-4.0.0.jar" value="${TEAMINOLOGY_LIB_PATH}/lucene-queryparser-4.0.0.jar" />
+
+	<path id="project.classpath">
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jbossall-client.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/servlet-api-2.5.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/log4j.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/cryptix32.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/gwt-user.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/htmlparser.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/ExtenXLS.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jfreechart-1.0.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/gson-1.4.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/iText-2.1.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jcommon-1.0.6.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/mail.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/activation.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/CalcEngineClient.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/commons-io-1.4.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/commons-fileupload-1.2.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/commons-math-1.2.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/axis.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/axis-ant.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/commons-discovery-0.2.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/commons-logging-1.0.4.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/saaj.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jaxrpc.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/sforceapi.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/wsdl4j-1.5.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/mysql-connector-java-3.1.11.jar" />
+		<pathelement location="${TeaminologyDomainObject.JarFile}" />
+		<pathelement location="${TeaminologyDAO.JarFile}" />
+		<pathelement location="${TeaminologyService.JarFile}" />
+
+
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-jms-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-webmvc-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-webmvc-portlet-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-web-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-tx-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-test-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-orm-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-oxm-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-jdbc-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-expression-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-core-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-context-support-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-context-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-beans-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-aspects-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-aop-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-jms-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-instrument-3.2.0.RELEASE.jar" />
+		<!--		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-asm-3.1.4.RELEASE.jar"/>-->
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jackson-annotations-2.2.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jackson-databind-2.2.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jackson-module-jaxb-annotations-2.2.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jackson-core-2.2.3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-security-config-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-security-web-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/spring-security-core-3.2.0.RELEASE.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jackson-all-1.6.1.jar" />
+		<!--<pathelement location="${TEAMINOLOGY_LIB_PATH}/urlrewrite-4.0.0.jar" />-->
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/hibernate3.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/hibernate-3.2.0.ga.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jsr250-api-1.0.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/aspectjrt-1.6.8.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/aspectjweaver-1.5.4.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/cglib-2.2.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/asm-3.1.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/guava-r03.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/FaceSDK.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jna.jar" />
+		<pathelement location="${TEAMINOLOGY_LIB_PATH}/jodd-3.4.3.jar" />
+		<pathelement location="${out}" />
+	</path>
+
+	<target name="_clean">
+		<delete dir="${BuildDir}" />
+	</target>
+
+	<target name="_create-dirs">
+		<mkdir dir="${BuildDir}" />
+		<mkdir dir="${out}" />
+		<mkdir dir="${config.tgt}" />
+	</target>
+
+	<target name="_init">
+		<copy includeemptydirs="false" todir="${out}">
+			<fileset dir="${src}" excludes="**/*.launch, **/*.java" />
+		</copy>
+		<copy includeemptydirs="false" todir="${config.tgt}">
+			<fileset file="${web.xml.template}" />
+		</copy>
+	</target>
+
+
+	<target name="_compile">
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${out}">
+			<src path="${src}" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="_war">
+		<war destfile="${WarFile}" webxml="${web.xml}">
+			<fileset dir="${web.src}" />
+
+			<classes dir="${out}" />
+
+			<webinf dir="${config.src}" excludes="**/web.xml" />
+
+			<lib file="${TeaminologyDAO.JarFile}" />
+			<lib file="${TeaminologyService.JarFile}" />
+
+			<lib file="${standard.jar}" />
+			<lib file="${lucene-core-4.0.0.jar}" />
+			<lib file="${lucene-analyzers-common-4.0.0.jar}" />
+			<lib file="${lucene-queryparser-4.0.0.jar}" />
+		</war>
+	</target>
+
+	<target name="_post-build-cleanup">
+		<delete dir="${config.tgt}" />
+	</target>
+
+	<target name="build">
+		<antcall target="_clean" />
+		<antcall target="_create-dirs" />
+		<antcall target="_init" />
+
+		<antcall target="_compile" />
+		<antcall target="_war" />
+		<antcall target="_post-build-cleanup" />
+	</target>
+
+
+	<target name="build_local_servlet_only">
+		<antcall target="_jar-gwt-for-web" />
+		<copy todir="${Local.Deploy.TeaminologyWeb.War.Lib.Dir}" file="${TeaminologyGwt.ForWeb.JarFile}" />
+
+		<antcall target="_compile" />
+		<copy todir="${Local.Deploy.TeaminologyWeb.War.Servlet.Dir}">
+			<fileset dir="${out}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="build_local_jsp_only">
+		<copy todir="${Local.Deploy.TeaminologyWeb.War.Dir}">
+			<fileset dir="${web.src}" />
+		</copy>
+	</target>
+
+
+	<target name="build_Teaminology_domainobject" description="Calls TeaminologyDomainObject project build">
+		<ant antfile="${TeaminologyDomainObject.location}/build.xml" inheritAll="false" target="build" />
+	</target>
+
+	<target name="build_TeaminologyService" description="Calls TeaminologyService project build">
+		<ant antfile="${TeaminologyService.location}/build.xml" inheritAll="false" target="build" />
+	</target>
+
+	<target name="build_TeaminologyDAO" description="Calls TeaminologyDAO project build">
+		<ant antfile="${TeaminologyDAO.location}/build.xml" inheritAll="false" target="build" />
+	</target>
+
+
+	<target name="help">
+		<echo>
+            Usage: ant [target]
+
+            Available Targets:
+            build_local ==> Builds Teaminology Web for local with env-local.properties
+            build_local_servlet_only ==> Builds Teaminology Web for local (Servlet classes Only)
+            build_local_jsp_only ==> Builds Teaminology Web for local (war only - JSP, HTML, CSS, JS, etc)
+            build ==> Builds Teaminology Web
+
+        </echo>
+	</target>
+
+</project>

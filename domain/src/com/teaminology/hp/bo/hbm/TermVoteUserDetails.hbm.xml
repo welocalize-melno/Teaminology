@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="TermVoteUserDetails" table="term_vote_user_details">
+        <id name="termVoteUsrDtlsId" column="term_vote_usr_dtls_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+
+        <property name="termId" column="term_id" type="java.lang.Integer"/>
+        <property name="userId" column="user_id" type="java.lang.Integer"/>
+        <property name="termTranslationId" column="term_translation_id" type="java.lang.Integer"/>
+        <property name="termVoteId" column="term_vote_id" type="java.lang.Integer"/>
+        <property name="votingDate" column="voting_date" type="java.util.Date"/>
+        <property name="updatedBy" column="updated_by" type="java.lang.Integer"/>
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="isActive" column="is_active" type="java.lang.String"/>
+        <property name="comments" column="comments" type="java.lang.String"/>
+        <property name="voteInviteStatus" column="vote_invite_status" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build script that outputs a deployable EAR file.
+
+Please set the following properties in local.properties file
+
+	LOCAL_DEPLOY_LOCATION: JBoss deploy location for local Dev deployment
+
+
+-->
+
+<project name="TeaminologyEar" basedir="." default="help">
+
+    <property file="local.properties"/>
+
+	<property name="branch.root" location="${basedir}/.."/>
+	<property name="Teaminology.lib" location="${branch.root}/lib"/>
+	
+	<property name="BuildDir" value="build"/>
+	
+	<property name="LibDir" location="${BuildDir}/lib"/>
+	
+	<property name="EarFile" value="${BuildDir}/TeaminologyEar.ear"/>
+    <property name="EarContent" value="EarContent"/>
+    <property name="app.xml" value="META-INF/application.xml"/>
+
+    <property name="TeaminologyWeb.location" value="../web"/>
+    <property name="TeaminologyWeb.war" value="${TeaminologyWeb.location}/build/TeaminologyWeb.war"/>
+    <property name="TeaminologyDomainObject.location" value="../domain"/>
+    <property name="TeaminologyDomainObject.jar"
+              value="${TeaminologyDomainObject.location}/build/teaminology-domainobject.jar"/>
+    <property name="TeaminologyDAO.location" value="../dao"/>
+    <property name="TeaminologyDAO.jar" value="${TeaminologyDAO.location}/build/teaminology-dao.jar"/>
+    <property name="TeaminologyService.location" value="../service"/>
+    <property name="TeaminologyService.jar" value="${TeaminologyService.location}/build/teaminology-service.jar"/>
+
+    <property name="Local.Deploy.Ear.Dir" value="${LOCAL_DEPLOY_LOCATION}/TeaminologyEar.ear"/>
+
+    <property name="Local.Build.TeaminologyEjb.Jar.File" value="${BuildDir}/TeaminologyEjb.jar"/>
+    <property name="Local.Deploy.TeaminologyEjb.Jar.File" value="${Local.Deploy.Ear.Dir}/TeaminologyEjb.jar"/>
+
+    <property name="Local.Build.TeaminologyDomain.Jar.File" value="${BuildDir}/teaminology-domainobject.jar"/>
+    <property name="Local.Deploy.TeaminologyDomain.Jar.File"
+              value="${Local.Deploy.Ear.Dir}/teaminology-domainobject.jar"/>
+
+    <property name="Local.Build.TeaminologyWeb.War.File" value="${BuildDir}/TeaminologyWeb.war"/>
+    <property name="Local.Deploy.TeaminologyWeb.War.File" value="${Local.Deploy.Ear.Dir}/TeaminologyWeb.war"/>
+    <property name="Local.Deploy.TeaminologyWeb.War.Dir" value="${Local.Deploy.Ear.Dir}/TeaminologyWeb.war"/>
+
+    <target name="_clean">
+        <delete dir="${BuildDir}"/>
+    </target>
+
+    <target name="_init">
+        <mkdir dir="${BuildDir}"/>
+        <copy includeemptydirs="false" todir="${BuildDir}">
+            <fileset dir="${EarContent}" excludes="${app.xml}"/>
+        </copy>
+    </target>
+
+    <target name="_build-subprojects">
+        <antcall target="_build-domain-object"/>
+        <antcall target="_build-web"/>
+    </target>
+
+    <target name="_build-domain-object">
+        <ant antfile="${TeaminologyDomainObject.location}/build.xml" inheritAll="false" target="build"/>
+        <copy todir="${BuildDir}" file="${TeaminologyDomainObject.jar}"/>
+    </target>
+
+    <target name="_build-web">    	
+    	<antcall target="copy-libs"/>
+    	<antcall target="_build_dao"/>
+        <antcall target="_build_service"/>
+        <ant antfile="${TeaminologyWeb.location}/build.xml" inheritAll="false" target="build"/>
+    	 <property name="TEAMINOLOGY_LIB_PATH"   value="${LibDir}"/>
+        <copy todir="${BuildDir}" file="${TeaminologyWeb.war}"/>
+    </target>
+	
+	<!--<target name="_build-web" depends="copy-libs">
+			<ant antfile="${WealthAtlas.web}/build.xml" inheritAll="false" target="build">
+		        <property name="WEALTHATLAS_LIB_PATH"   value="${LibDir}"/>
+			    <property name="WealthAtlasEjb.JarFile" value="${WealthAtlasEjb.jar}"/>
+			    <property name="WarFile"                value="${WealthAtlasWeb.war}"/>
+			</ant>
+		</target>
+	-->
+	
+	
+	
+	
+
+	 <target name="_ear">
+	 		<property name="custom.manifest" location="${BuildDir}/META-INF/MANIFEST.MF"/>
+	        <ear destfile="${EarFile}" manifest="${custom.manifest}" appxml="${EarContent}/${app.xml}">
+	            <fileset dir="${BuildDir}"/>
+	        </ear>
+	    </target>
+
+    <target name="build">
+        <condition property="no_gwt">
+            <not>
+                <equals arg1="${gwt}" arg2="false"/>
+            </not>
+        </condition>
+        <antcall target="_build"/>
+    </target>
+
+    <target name="_build">
+        <antcall target="_clean"/>
+        <antcall target="_init"/>
+        <antcall target="_build-subprojects"/>
+        <antcall target="_ear"/>
+    </target>
+
+    <target name="build_auto">
+        <condition property="no_gwt">
+            <not>
+                <equals arg1="${gwt}" arg2="false"/>
+            </not>
+        </condition>
+        <property name="logfile" value="teaminology_build_auto.log"/>
+        <record name="${logfile}" action="start"/>
+
+        <tstamp>
+            <format property="startTStamp" pattern="yyyy-MM-dd hh:mm:ss"/>
+        </tstamp>
+        <echo>${startTStamp} : Teaminology build started</echo>
+        <echo/>
+
+        <property environment="env"/>
+        <property name="branch" value="teaminology/${env.branch}/..."/>
+        <property name="keyfile" value="${env.keyfile}"/>
+        <property name="remoteTodir1" value="${env.remoteTodir1}"/>
+        <property name="remoteTodir2" value="${env.remoteTodir2}"/>
+        <property name="mailhost" value="${env.mailhost}"/>
+        <property name="mailfrom" value="${env.mailfrom}"/>
+        <property name="mailtolist" value="${env.mailtolist}"/>
+        <property name="mailsubject" value="${env.mailsubject}"/>
+
+        <path id="svnant.classpath">
+            <fileset dir="${ant.home}/lib">
+                <include name="svnkit.jar,svnjavahl.jar,svnClientAdapter.jar,svnant.jar"/>
+            </fileset>
+        </path>
+
+        <typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.classpath"/>
+        <svn username="${env.svnUsername}" password="${env.svnPassword}" javahl="true">
+            <update dir="../"/>
+        </svn>
+
+        <antcall target="_build"/>
+
+        <tstamp>
+            <format property="endTStamp" pattern="yyyy-MM-dd hh:mm:ss"/>
+        </tstamp>
+        <echo>${endTStamp} : Teaminology build completed</echo>
+        <echo/>
+
+        <scp
+                localFile="${EarFile}"
+                remoteTodir="${remoteTodir1}"
+                trust="true"
+                keyfile="${keyfile}"
+                passphrase=""
+                verbose="true"
+                />
+
+        <scp
+                localFile="${EarFile}"
+                remoteTodir="${remoteTodir2}"
+                trust="true"
+                keyfile="${keyfile}"
+                passphrase=""
+                verbose="true"
+                />
+
+        <record name="${logfile}" action="stop"/>
+
+        <scp
+                localFile="${logfile}"
+                remoteTodir="${remoteTodir1}"
+                trust="true"
+                keyfile="${keyfile}"
+                passphrase=""
+                />
+
+        <scp
+                localFile="${logfile}"
+                remoteTodir="${remoteTodir2}"
+                trust="true"
+                keyfile="${keyfile}"
+                passphrase=""
+                />
+
+        <mail
+                mailhost="mailhost.equilar.com"
+                from="${mailfrom}"
+                tolist="${mailtolist}"
+                subject="${mailsubject}"
+                messagefile="${logfile}"
+                />
+    </target>
+
+
+    <target name="build_local" depends="trigger_deploy">
+        <condition property="no_gwt">
+            <not>
+                <equals arg1="${gwt}" arg2="false"/>
+            </not>
+        </condition>
+
+        <antcall target="_build">
+            <param name="build.target" value="build_local"/>
+        </antcall>
+
+        <delete dir="${Local.Deploy.Ear.Dir}"/>
+        <mkdir dir="${Local.Deploy.Ear.Dir}"/>
+
+        <unzip src="${EarFile}" dest="${Local.Deploy.Ear.Dir}"/>
+        <delete file="${Local.Deploy.TeaminologyWeb.War.File}"/>
+
+        <mkdir dir="${Local.Deploy.TeaminologyWeb.War.Dir}"/>
+        <unzip src="${Local.Build.TeaminologyWeb.War.File}" dest="${Local.Deploy.TeaminologyWeb.War.Dir}"/>
+    </target>
+
+    <target name="build_local_no_gwt">
+        <antcall target="build_local">
+            <param name="gwt" value="false"/>
+        </antcall>
+    </target>
+
+    <target name="build_local_domain_only">
+        <antcall target="_build-domain-object"/>
+        <delete file="${Local.Deploy.TeaminologyDomain.Jar.File}"/>
+        <copy file="${Local.Build.TeaminologyDomain.Jar.File}" tofile="${Local.Deploy.TeaminologyDomain.Jar.File}"/>
+    </target>
+
+    <target name="build_local_web_only">
+        <antcall target="_build-web">
+            <param name="build.target" value="build_local"/>
+        </antcall>
+
+        <delete dir="${Local.Deploy.TeaminologyWeb.War.Dir}"/>
+        <mkdir dir="${Local.Deploy.TeaminologyWeb.War.Dir}"/>
+
+        <unzip src="${Local.Build.TeaminologyWeb.War.File}" dest="${Local.Deploy.TeaminologyWeb.War.Dir}"/>
+    </target>
+
+    <target name="build_local_service">
+        <antcall target="_build_service"/>
+        <copy todir="${Local.Deploy.TeaminologyWeb.War.Dir}/WEB-INF/lib" file="${TeaminologyService.jar}"/>
+    </target>
+
+    <target name="build_local_dao">
+        <antcall target="_build_dao"/>
+        <copy todir="${Local.Deploy.TeaminologyWeb.War.Dir}/WEB-INF/lib" file="${TeaminologyDAO.jar}"/>
+    </target>
+
+    <target name="build_teaminology_domainobject" description="Calls TeaminologyDomainObject project build">
+        <ant antfile="${TeaminologyWeb.location}/build.xml" inheritAll="false" target="build_teaminology_domainobject"/>
+    </target>
+
+    <target name="_build_dao" description="Calls TeaminologyDAO project build">
+        <ant antfile="${TeaminologyWeb.location}/build.xml" inheritAll="false" target="build_TeaminologyDAO"/>
+    </target>
+
+    <target name="_build_service" description="Calls TeaminologyService project build">
+        <ant antfile="${TeaminologyWeb.location}/build.xml" inheritAll="false" target="build_TeaminologyService"/>
+    </target>
+
+    <target name="help">
+        <echo>
+            Usage: ant [target]
+
+            Available Targets:
+            build_local ==> Builds Teaminology for local, and deploys to LOCAL_DEPLOY_LOCATION specified in
+            local.properties (exploded deploy)
+            build_local_web_only ==> Builds Teaminology (Web only) for local, and deploys to LOCAL_DEPLOY_LOCATION
+            specified in local.properties
+            build_local_domain_only ==> Builds TeaminologyDomain for local, and deploys to LOCAL_DEPLOY_LOCATION
+            specified in local.properties
+            build_local_service ==> Builds TeaminologyService for local, and deploys to LOCAL_DEPLOY_LOCATION specified
+            in local.properties
+            build_local_dao ==> Builds TeaminologyDAO for local, and deploys to LOCAL_DEPLOY_LOCATION specified in
+            local.properties
+            build_auto ==> Syncs svn branch, build using build_qa and scps the file to qa server
+            build ==> Builds Teaminology EAR
+        </echo>
+    </target>
+
+	
+	
+	 <target name="_local_init">	
+	        <!-- Windows specific "local" deployment -->
+	        <property file="local.properties" />
+	 	 <!-- <property name="javahome"   location="${LOCAL_JDK_HOME}"/>-->
+
+	        <property name="Local.Deploy.Ear.Dir"       location="${LOCAL_DEPLOY_LOCATION}/TeaminologyEar.ear"/>
+	        <property name="Local.Deploy.Ear.dodeploy"  value="TeaminologyEar.ear.dodeploy"/>
+	        <property name="Local.Deploy.Ear.deployed"  location="${LOCAL_DEPLOY_LOCATION}/TeaminologyEar.ear.deployed"/>
+	        <property name="Local.Deploy.Ear.failed"  location="${LOCAL_DEPLOY_LOCATION}/TeaminologyEar.ear.failed"/>
+	 	
+	        <!--<property name="Local.Deploy.Ear.dodeploy_loc"  location="${LOCAL_DEPLOY_LOCATION}/TeaminologyEar.ear.dodeploy"/>-->
+    <!--    <property name="Local.Deploy.WealthAtlasEjb.Jar.File"   location="${Local.Deploy.Ear.Dir}/WealthAtlasEjb.jar"/>	 	
+	        <property name="Local.Deploy.TeaminologyWeb.War.File"   location="${Local.Deploy.Ear.Dir}/TeaminologyWeb.war"/>
+	        <property name="Local.Deploy.TeaminologyWeb.War.Dir"    location="${Local.Deploy.Ear.Dir}/TeaminologyWeb.war"/> -->
+	    </target>
+	
+	<target name="trigger_deploy" depends="_local_init"
+	            description="trigger a hot (re-)deployment LOCAL_DEPLOY_LOCATION specified in local.properties">
+			<delete file="${Local.Deploy.Ear.deployed}"/>
+			<delete file="${Local.Deploy.Ear.failed}"/>
+			<!--<delete file="${Local.Deploy.Ear.dodeploy_loc}"/>-->
+			<copy todir="${LOCAL_DEPLOY_LOCATION}" file="${Local.Deploy.Ear.dodeploy}"/>
+		</target>
+	
+	<target name="copy-libs" depends="_init"
+	            description="copies lib files to lib directory">
+			<mkdir dir="${LibDir}"/>
+			<echo>[copy-libs] copy libs the lib dir ...</echo> 
+			<copy verbose="true" todir="${LibDir}">
+				<fileset dir="${Teaminology.lib}" 
+					excludes="jsr*.jar,asm*.jar,grizzly*.jar,*jersey*.jar,*jetty*.jar"
+					includes="*.jar, *.zip"/>
+			</copy>
+		</target>
+	
+	
+	 <!--<target name="_build" depends="_clean, _ear"/>-->
+	
+</project>

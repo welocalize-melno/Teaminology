@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application id="Application_ID"
+             version="1.4"
+             xmlns="http://java.sun.com/xml/ns/j2ee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/application_1_4.xsd">
+
+    <display-name>TeaminologyEar</display-name>
+
+    <module id="EjbModule_1210110329604">
+        <ejb>teaminology-domainobject.jar</ejb>
+    </module>
+    <module id="WebModule_1210110329618">
+        <web>
+            <web-uri>TeaminologyWeb.war</web-uri>
+            <context-root>app</context-root>
+        </web>
+    </module>
+</application>
