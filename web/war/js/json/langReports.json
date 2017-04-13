@@ -1,0 +1,10 @@
+{
+	"langTeamDetails":[
+					 { "langId" : 1, "langTeam": "ES - Mexico", "numofmembers":"17", "accuracy":"78%", "initTerms":"402,814", "numDebatedTerms":"4,782","numActPolls":"70","monthlyAvg": "69","totalVotes":"88,930", "termsPrcnt":"68"},
+					 { "langId" : 2, "langTeam": "ES - Spain", "numofmembers":"12", "accuracy":"82%", "initTerms":"410,634", "numDebatedTerms":"3,871","numActPolls":"62","monthlyAvg": "65","totalVotes":"52,289", "termsPrcnt":"18"},
+					 { "langId" : 3, "langTeam": "FR - Canada", "numofmembers":"8", "accuracy":"71%", "initTerms":"312,982", "numDebatedTerms":"1,389","numActPolls":"15","monthlyAvg": "13","totalVotes":"9,821", "termsPrcnt":"32"},
+					 { "langId" : 4, "langTeam": "FR - France", "numofmembers":"14", "accuracy":"79%", "initTerms":"364,179", "numDebatedTerms":"2,872","numActPolls":"54","monthlyAvg": "46","totalVotes":"31,928", "termsPrcnt":"25"},
+					 { "langId" : 5, "langTeam": "GR - Germany", "numofmembers":"15", "accuracy":"87%", "initTerms":"401,341", "numDebatedTerms":"3,179","numActPolls":"43","monthlyAvg": "39","totalVotes":"65,390", "termsPrcnt":"48"},
+					 { "langId" : 6, "langTeam": "ZH - China", "numofmembers":"13", "accuracy":"67%", "initTerms":"420,389", "numDebatedTerms":"3,721","numActPolls":"46","monthlyAvg": "32","totalVotes":"71,382", "termsPrcnt":"54"}
+				  ]
+}

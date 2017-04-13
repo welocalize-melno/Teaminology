@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TermUpdateDetails" table="term_update_details">
+        <id column="term_update_id" name="termUpdateId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="term_id" name="termId" type="java.lang.Integer"/>
+        <property column="changed_source_term" name="changedSourceTerm" type="java.lang.String"/>
+        <property column="changed_target_term" name="changedTargetTerm" type="java.lang.String"/>
+        <property column="user_id" name="userId" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        
+        <property column="part_of_speech" name="termsPOS" type="java.lang.String"/>
+        <property column="concept_definition" name="conceptDefinition" type="java.lang.String"/>
+        <property column="term_form" name="termForm" type="java.lang.String"/>
+        <property column="term_status" name="termStatus" type="java.lang.String"/>
+        <property column="term_category" name="termCategory" type="java.lang.String"/>
+        <property column="term_domain" name="termDomain" type="java.lang.String"/>
+        <property column="term_notes" name="termNotes" type="java.lang.String"/>
+        <property column="target_part_of_speech" name="targetTermPOS" type="java.lang.String"/>
+        <property column="term_usage" name="termUsage" type="java.lang.String"/>
+        
+        
+    </class>
+</hibernate-mapping>

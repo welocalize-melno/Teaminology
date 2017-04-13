@@ -1,0 +1,61 @@
+/*    @font-face {
+    font-family: "HP Simplified other";
+ 	font-style: normal;
+    font-weight: normal;
+    src: url("http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-regular-eot.eot?#iefix") format("embedded-opentype"), 
+    url("http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-regular-woff.woff") format("woff"),
+    url("http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-regular-ttf.ttf") format("truetype");
+} 
+
+  @font-face {
+    font-family: "HP Simplified";
+ 	font-style: normal;
+    font-weight: normal;
+    src: url("http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-light-eot.eot?#iefix") format("embedded-opentype"), 
+    url("http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-light-woff.woff") format("woff"),
+    url("http://www8.hp.com/h10180/hp-fonts/v2-0/hps-euro-w01-light-ttf.ttf") format("truetype");
+}      
+ */
+@font-face {
+    font-family: 'HP Simplified other';
+    src: url('hpsimplified_rg-webfont.eot');
+    src: url('hpsimplified_rg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('hpsimplified_rg-webfont.woff2') format('woff2'),
+         url('hpsimplified_rg-webfont.woff') format('woff'),
+         url('hpsimplified_rg-webfont.ttf') format('truetype'),
+         url('hpsimplified_rg-webfont.svg#hp_simplifiedregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'HP Simplified';
+    src: url('hpsimplified_lt-webfont.eot');
+    src: url('hpsimplified_lt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('hpsimplified_lt-webfont.woff2') format('woff2'),
+         url('hpsimplified_lt-webfont.woff') format('woff'),
+         url('hpsimplified_lt-webfont.ttf') format('truetype'),
+         url('hpsimplified_lt-webfont.svg#hp_simplifiedlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'hp_simplifiedbold';
+    src: url('hpsimplified_bd-webfont.eot');
+    src: url('hpsimplified_bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('hpsimplified_bd-webfont.woff2') format('woff2'),
+         url('hpsimplified_bd-webfont.woff') format('woff'),
+         url('hpsimplified_bd-webfont.ttf') format('truetype'),
+         url('hpsimplified_bd-webfont.svg#hp_simplifiedbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.mceItemTable, .mceItemTable td, .mceItemTable th, .mceItemTable caption, .mceItemVisualAid {
+    border: medium none;
+}
