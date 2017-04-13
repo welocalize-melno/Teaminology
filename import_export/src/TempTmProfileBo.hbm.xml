@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TempTmProfileBo" table="temp_tm_profile_info">
+        <id column="tm_profile_info_id" name="tmProfileInfoId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="file_Id" name="fileId" type="java.lang.String"/>
+        <property column="source" name="source" type="java.lang.String"/>
+        <property column="target" name="target" type="java.lang.String"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <property column="created_by" name="createdBy" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="prop_ref" name="propRef" type="java.lang.String"/>
+        <property column="source_lang" name="sourceLang" type="java.lang.Integer"/>
+        <property column="target_lang" name="targetLang" type="java.lang.Integer"/>
+        <property column="product_line" name="productGroupId" type="java.lang.Integer"/>
+        <property column="industry_domain" name="domainId" type="java.lang.Integer"/>
+        <property column="content_type" name="contentTypeId" type="java.lang.Integer"/>
+        <property column="company" name="companyId" type="java.lang.Integer"/>
+
+        <property column="tu_id" name="tuId" type="java.lang.String"/>
+        <property column="tu_creation_id" name="tuCreationId" type="java.lang.String"/>
+        <property column="tu_creation_date" name="tuCreationDate" type="java.lang.String"/>
+        <property column="tu_change_id" name="tuChangeId" type="java.lang.String"/>
+        <property column="tu_change_date" name="tuChangeDate" type="java.lang.String"/>
+
+        <property column="tuv_source_creation_id" name="tuSourceCreationId" type="java.lang.String"/>
+        <property column="tuv_source_creation_date" name="tuSourceCreationDate" type="java.lang.String"/>
+        <property column="tuv_source_change_id" name="tuSourceChangeId" type="java.lang.String"/>
+        <property column="tuv_source_change_date" name="tuSourceChangeDate" type="java.lang.String"/>
+
+        <property column="tuv_target_creation_id" name="tuTargetCreationId" type="java.lang.String"/>
+        <property column="tuv_target_creation_date" name="tuTargetCreationDate" type="java.lang.String"/>
+        <property column="tuv_target_change_id" name="tuTargetChangeId" type="java.lang.String"/>
+        <property column="tuv_target_change_date" name="tuTargetChangeDate" type="java.lang.String"/>
+
+        <set cascade="all" inverse="true" lazy="false" name="tmProperties"
+             sort="unsorted">
+            <key column="tm_profile_info_id"/>
+            <one-to-many class="com.teaminology.hp.bo.TempTMProperties"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

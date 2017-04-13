@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TermVoteMaster" table="term_vote_master">
+        <id column="term_vote_id" name="termVoteId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="term_id" name="termId" type="java.lang.Integer"/>
+        <property column="invited_by" name="invitedBy" type="java.lang.Integer"/>
+        <property column="invited_date" name="invitedDate" type="java.util.Date"/>
+        <property column="voting_expired_date" name="votingExpiredDate"
+                  type="java.util.Date"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

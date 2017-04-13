@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+dependencies: org.codehaus.jackson.jackson-core-asl,asm.asm, org.codehaus.jackson.jackson-jaxrs, org.codehaus.jackson.jackson-mapper-asl, org.codehaus.jackson.jackson-xc,com.Teaminology.configuration,org.apache.httpcomponents
