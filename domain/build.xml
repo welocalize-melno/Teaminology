@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build that outputs a JAR file for Teaminology BO Module.
+
+@author LiMing
+-->
+
+<project name="TeaminologyDomainObject" basedir="." default="build">
+
+    <property name="BuildDir" value="build"/>
+    <property name="TEAMINOLOGY_LIB_PATH" value="../lib"/>
+    <property name="src" value="src"/>
+    <property name="out" value="${BuildDir}/classes"/>
+    <property name="JarFile" value="${BuildDir}/teaminology-domainobject.jar"/>
+
+    <path id="TeaminologyDomainObject.classpath">
+        <pathelement location="{out}"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/log4j.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/axis.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/jaxrpc.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/lucene-core-4.0.0.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/lucene-analyzers-common-4.0.0.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/lucene-queryparser-4.0.0.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${BuildDir}"/>
+    </target>
+
+    <target name="init">
+        <mkdir dir="${BuildDir}"/>
+        <mkdir dir="${out}"/>
+    </target>
+
+    <target name="compile">
+        <echo>Compiling...</echo>
+        <javac
+                srcdir="${src}"
+                destdir="${out}"
+                debug="on"
+                >
+            <classpath refid="TeaminologyDomainObject.classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar">
+        <echo>Creating jar...</echo>
+        <copy todir="${out}">
+            <fileset dir="src"
+                     excludes="**/*.java"
+                    />
+        </copy>
+        <jar
+                destfile="${JarFile}"
+                basedir="${out}"
+                excludes="**/*.java"
+                />
+    </target>
+
+    <target name="build">
+        <antcall target="clean"/>
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="jar"/>
+    </target>
+</project>

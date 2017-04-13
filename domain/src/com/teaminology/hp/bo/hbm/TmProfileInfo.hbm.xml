@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TmProfileInfo" table="tm_profile_info">
+        <id column="tm_profile_info_id" name="tmProfileInfoId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="source" name="source" type="java.lang.String"/>
+        <property column="target" name="target" type="java.lang.String"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <property column="created_by" name="createdBy" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="prop_ref" name="propRef" type="java.lang.String"/>
+
+        <many-to-one class="com.teaminology.hp.bo.lookup.ContentType"
+                     column="content_type" lazy="false" name="contentType" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.lookup.Domain"
+                     column="industry_domain" lazy="false" name="domain" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.lookup.ProductGroup"
+                     column="product_line" lazy="false" name="productGroup" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.lookup.Language"
+                     column="source_lang" lazy="false" name="sourceLang" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.lookup.Language"
+                     column="target_lang" lazy="false" name="targetLang" not-null="false"/>
+
+        <many-to-one class="com.teaminology.hp.bo.lookup.Company"
+                     column="company" lazy="false" name="company" not-null="false"/>
+    </class>
+</hibernate-mapping>
