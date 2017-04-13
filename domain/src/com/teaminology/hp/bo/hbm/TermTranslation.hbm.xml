@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TermTranslation" table="term_translation">
+        <id column="term_translation_id" name="termTranslationId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="term_id" name="termId" type="java.lang.Integer"/>
+        <property column="suggested_term" name="suggestedTerm" type="java.lang.String"/>
+        <property column="suggested_term_lang_id" name="suggestedTermLangId" type="java.lang.Integer"/>
+        <property column="vote" name="vote" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="user_id" name="userId" type="java.lang.Integer"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <property column="comment" name="comment" type="java.lang.String"/>
+        <property column="is_updated" name="isUpdated" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="Privileges" table="privileges">
+        <id name="privilegeId" column="privilege_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+
+        <property name="privilegeDesc" column="privilege_desc" type="java.lang.String"/>
+        <property name="createDate" column="create_date" type="java.util.Date"/>
+        <property name="createdBy" column="created_by" type="java.lang.Integer"/>
+        <property name="updatedBy" column="updated_by" type="java.lang.Integer"/>
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="isActive" column="is_active" type="java.lang.String"/>
+        <property name="jsId" column="js_id" type="java.lang.String"/>
+        <property name="displayOrder" column="display_order" type="java.lang.Integer"/>
+        <many-to-one
+                class="com.teaminology.hp.bo.Menu"
+                column="menu_id"
+                name="menu"
+                not-null="false"
+                lazy="false"
+                cascade="all"/>
+        <many-to-one
+                class="com.teaminology.hp.bo.SubMenu"
+                column="sub_menu_id"
+                name="subMenu"
+                not-null="false"
+                lazy="false"
+                cascade="all"/>
+
+    </class>
+</hibernate-mapping>

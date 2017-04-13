@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Build that outputs a JAR file for Teaminology DAO Tier.
+
+@author LiMing
+-->
+
+<project name="TeaminologyDAO" basedir="." default="build">
+
+    <property name="BuildDir" value="build"/>
+    <property name="TEAMINOLOGY_LIB_PATH" value="../lib"/>
+    <property name="src" value="src"/>
+    <property name="out" value="${BuildDir}/classes"/>
+    <property name="JarFile" value="${BuildDir}/teaminology-dao.jar"/>
+
+    <property name="TeaminologyDomainObject.location" value="../domain"/>
+    <property name="TeaminologyDomainObject.Src" value="${TeaminologyDomainObject.location}/src"/>
+    <property name="TeaminologyDomainObject.JarFile" value="../domain/build/teaminology-domainobject.jar"/>
+
+
+    <path id="project.classpath">
+        <pathelement location="{out}"/>
+        <pathelement location="${TeaminologyDomainObject.JarFile}"/>
+
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/log4j.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/junit-4.8.2.jar"/>
+
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.transaction-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.test-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.orm-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.jdbc-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.expression-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.core-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.context.support-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.context-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.beans-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.aspects-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.aop-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/org.springframework.asm-3.0.4.RELEASE.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/hibernate3.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/jsr250-api-1.0.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/aspectjrt-1.6.8.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/aspectjweaver-1.5.4.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/cglib-2.2.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/asm-3.1.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/guava-r03.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/jboss-common-jdbc-wrapper.jar"/>
+        <pathelement location="${TEAMINOLOGY_LIB_PATH}/jodd-3.4.3.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${BuildDir}"/>
+    </target>
+
+    <target name="init">
+        <mkdir dir="${BuildDir}"/>
+        <mkdir dir="${out}"/>
+    </target>
+
+    <target name="compile">
+        <echo>Compiling...</echo>
+        <javac
+                srcdir="${src}"
+                destdir="${out}"
+                debug="on"
+                >
+            <classpath refid="project.classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar">
+        <echo>Creating jar...</echo>
+        <jar
+                destfile="${JarFile}"
+                basedir="${out}"
+                excludes="**/*.java"
+                />
+    </target>
+
+    <target name="build">
+        <antcall target="clean"/>
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="jar"/>
+    </target>
+</project>

@@ -1,0 +1,9 @@
+{
+	"termsPerQuarter" : [
+					{ "label":"Q1-2011" , "value":16400 },
+					{ "label":"Q2-2011" , "value":18600 },
+					{ "label":"Q3-2011" , "value":24000 },
+					{ "label":"Q4-2011" , "value":15700 },
+					{ "label":"Q1-2012" , "value":12700 }
+				]
+}

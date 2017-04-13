@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="Language" table="language_lookup">
+        <id name="languageId" column="language_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+
+        <property name="languageLabel" column="language_label" type="java.lang.String"/>
+        <property name="languageCode" column="language_code" type="java.lang.String"/>
+        <property name="languageNotes" column="language_notes" type="java.lang.String"/>
+        <property name="createdBy" column="created_by" type="java.lang.Integer"/>
+        <property name="createDate" column="create_Date" type="java.util.Date"/>
+        <property name="updatedBy" column="updated_by" type="java.lang.Integer"/>
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="isActive" column="is_active" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

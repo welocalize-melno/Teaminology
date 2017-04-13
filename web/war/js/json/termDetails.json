@@ -1,0 +1,8 @@
+{
+	"termDetails":[
+					 { "termId" : 1, "termSrc": "Venami ", "suggstdTrnslatn":"Adispiscing", "srcLnguage":"French", "expiryDt":"01/03/2012","Services": 26,"Hardware":74},
+					 { "termId" : 2, "termSrc": "Amet ", "suggstdTrnslatn":"Euismod", "srcLnguage":"French", "expiryDt":"01/03/2012","Services": 26,"Hardware":74},
+					 { "termId" : 3, "termSrc": "Replies ", "suggstdTrnslatn":"Mostrar", "srcLnguage":"Italian", "expiryDt":"01/03/2012","Services": 26,"Hardware":74},
+					 { "termId" : 4, "termSrc": "Nostrud ", "suggstdTrnslatn":"Nonummy", "srcLnguage":"Spanish", "expiryDt":"01/03/2012","Services": 26,"Hardware":74}
+				  ]
+}

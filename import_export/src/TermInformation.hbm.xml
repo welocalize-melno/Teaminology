@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="TermInformation" table="term_information">
+        <id column="term_id" name="termId" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="term_being_polled" generated="never" lazy="false"
+                  name="termBeingPolled" type="java.lang.String"/>
+        <property column="term_status_id" generated="never" lazy="false"
+                  name="termStatusId" type="java.lang.Integer"/>
+        <property column="term_usage" generated="never" lazy="false"
+                  name="termUsage" type="java.lang.String"/>
+        <property column="term_notes" generated="never" lazy="false"
+                  name="termNotes" type="java.lang.String"/>
+        <property column="term_lang_id" generated="never" lazy="false"
+                  name="termLangId" type="java.lang.Integer"/>
+        <property column="concept_definition" generated="never" lazy="false"
+                  name="conceptDefinition" type="java.lang.String"/>
+        <property column="concept_notes" generated="never" lazy="false"
+                  name="conceptNotes" type="java.lang.String"/>
+        <property column="concept_product_group_id" generated="never"
+                  lazy="false" name="conceptProdGroup" type="java.lang.Integer"/>
+        <property column="concept_category_id" generated="never" lazy="false"
+                  name="conceptCatId" type="java.lang.Integer"/>
+        <property column="suggested_term" generated="never" lazy="false"
+                  name="suggestedTerm" type="java.lang.String"/>
+        <property column="suggested_term_lang_id" generated="never"
+                  lazy="false" name="suggestedTermLangId" type="java.lang.Integer"/>
+        <property column="suggested_term_status_id" generated="never"
+                  lazy="false" name="suggestedTermStatusId" type="java.lang.Integer"/>
+        <property column="suggested_term_form_id" generated="never"
+                  lazy="false" name="suggestedTermFormId" type="java.lang.Integer"/>
+        <property column="suggested_term_pos_id" generated="never"
+                  lazy="false" name="suggestedTermPosId" type="java.lang.Integer"/>
+        <property column="suggested_term_usage" generated="never" lazy="false"
+                  name="suggestedTermUsage" type="java.lang.String"/>
+        <property column="suggested_term_notes" generated="never" lazy="false"
+                  name="suggestedTermNotes" type="java.lang.String"/>
+        <property column="suggested_term_program_id" generated="never"
+                  lazy="false" name="suggestedTermPgmId" type="java.lang.Integer"/>
+        <property column="create_date" generated="never" lazy="false"
+                  name="createDate" type="java.util.Date"/>
+        <property column="created_by" generated="never" lazy="false"
+                  name="createdBy" type="java.lang.Integer"/>
+        <property column="updated_by" generated="never" lazy="false"
+                  name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" generated="never" lazy="false"
+                  name="updateDate" type="java.util.Date"/>
+        <property column="is_active" generated="never" lazy="false"
+                  name="isActive" type="java.lang.String"/>
+        <property column="comments" generated="never" lazy="false"
+                  name="comments" type="java.lang.String"/>
+        <property column="photo_path" generated="never" lazy="false"
+                  name="photoPath" type="java.lang.String"/>
+        <property column="is_tm" generated="never" lazy="false" name="isTM" type="java.lang.String"/>
+        <many-to-one class="com.teaminology.hp.bo.Company"
+                     column="company_id" lazy="false" name="termCompany" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.Domain"
+                     column="domain_id" lazy="false" name="termDomain" not-null="false"/>
+        <!-- <set cascade="all" inverse="true" lazy="false"
+         name="globalsightTermInfo" sort="unsorted">
+         <key column="term_id"/>
+         <one-to-many class="com.teaminology.hp.bo.GlobalsightTermInfo"/>
+        </set>
+       <many-to-one class="com.teaminology.hp.bo.lookup.Status" column="term_status_id"
+                  name="termStatus" not-null="false" lazy="false"/>
+       <many-to-one class="com.teaminology.hp.bo.lookup.Status" column="
+                  suggested_term_status_id" name="suggestedTermStatus" not-null="false" lazy="false"/> -->
+    </class>
+</hibernate-mapping>

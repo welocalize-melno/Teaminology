@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- ============================== -->
+    <!-- Append messages to the console -->
+    <!-- ============================== -->
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <!--
+        <param name="Threshold" value="INFO"/>
+        -->
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param name="ConversionPattern" value="%d %-5p [%C{1}:%L] %m%n"/>
+        </layout>
+    </appender>
+
+
+    <!-- =================================== -->
+    <!-- A time/date based rolling appender  -->
+    <!-- =================================== -->
+
+    <!-- A time/date based rolling appender -->
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+
+        <param name="file" value="C:/teaminology_impexp/import_export/log/import_export.log"/>
+
+        <param name="Append" value="true"/>
+
+        <!-- Rollover at midnight each day -->
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+
+        <!-- Rollover at midnight and midday of each day
+        <param name="DatePattern" value="'.'yyyy-MM-dd-a"/>
+        -->
+
+        <!-- Rollover at the top of each hour
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        -->
+
+        <!--
+        <param name="MaxFileSize" value="100KB"/>
+         -->
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param name="ConversionPattern" value="%d %-5p [%C{1}:%L] %m%n"/>
+
+            <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n
+            <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+            -->
+        </layout>
+    </appender>
+
+
+    <!-- ====================== -->
+    <!-- More Appender examples -->
+    <!-- ====================== -->
+
+    <!-- EMail events to an administrator
+    <appender name="SMTP" class="org.apache.log4j.net.SMTPAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="To" value="admin@myhost.domain.com"/>
+        <param name="From" value="nobody@myhost.domain.com"/>
+        <param name="Subject" value="JBoss Sever Errors"/>
+        <param name="SMTPHost" value="localhost"/>
+        <param name="BufferSize" value="10"/>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{ABSOLUTE},%c{1}] %m%n"/>
+        </layout>
+    </appender>
+    -->
+
+
+    <!-- ============================ -->
+    <!-- Setup the com.teaminology logger -->
+    <!-- ============================ -->
+
+    <logger name="com.teaminology">
+        <level value="DEBUG"/>
+    </logger>
+
+
+    <!-- ======================= -->
+    <!-- Setup the Root category -->
+    <!-- ======================= -->
+
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,25 @@
+{ 
+	"Type":"Nostrud" , 
+	"Product":"Jones", 
+	"Program":"diam nonummy", 
+	"Domain":"aliquam erat", 
+	"Definition":"dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", "Usage":"Ut wisi zzril delenit Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", 
+	"topSuggestion" : "Mostrar",
+	"suggestions" : [
+		{
+			"optionName" : "Mostrar",
+			"noOfVotes" : 9,
+			"votersNames" : "Bob, Joe Convertor, Mrs Lingua, Jane Translator, Samantha Grammar, Dave Dialect, Maria avvy, Billy Multilingual"
+		},
+		{
+			"optionName" : "Menções",
+			"noOfVotes" : 7,
+			"votersNames" : "Bob, Joe Convertor, Mrs Lingua, Jane Translator, Samantha Grammar, Dave Dialect, Maria avvy, Billy Multilingual"
+		},
+		{
+			"optionName" : "Respostas",
+			"noOfVotes" : 4,
+			"votersNames" : "Bob, Joe Convertor, Mrs Lingua, Jane Translator, Samantha Grammar, Dave Dialect, Maria avvy, Billy Multilingual"
+		}
+	]
+}

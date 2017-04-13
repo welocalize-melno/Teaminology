@@ -1,0 +1,19 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+
+    <class name="PartsOfSpeech" table="parts_of_speech_lookup">
+        <id name="partsOfSpeechId" column="parts_of_speech_id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+
+        <property name="partOfSpeech" column="part_of_speech" type="java.lang.String"/>
+        <property name="createdBy" column="created_by" type="java.lang.Integer"/>
+        <property name="createDate" column="create_date" type="java.util.Date"/>
+        <property name="updatedBy" column="updated_by" type="java.lang.Integer"/>
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="isActive" column="is_active" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

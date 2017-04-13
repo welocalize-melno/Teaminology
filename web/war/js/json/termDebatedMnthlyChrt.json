@@ -1,0 +1,9 @@
+{
+	"termsDebatedPerMonth" : [
+					{ "label":"Nov" , "value":1200 },
+					{ "label":"Dec" , "value":3750 },
+					{ "label":"Jan" , "value":6000 },
+					{ "label":"Feb" , "value":11250 },
+					{ "label":"Mar" , "value":8000 }
+				]
+}

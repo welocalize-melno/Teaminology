@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.teaminology.hp.bo">
+    <class name="GlobalsightTermInfo" table="globalsight_term_info">
+        <id column="globalsight_term_info_id" name="globalsightTermInfoId"
+            type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <property column="segment_id" name="segmentId" type="java.lang.String"/>
+        <property column="source_segment" name="sourceSegment" type="java.lang.String"/>
+        <property column="target_segment" name="targetSegment" type="java.lang.String"/>
+        <property column="origin" name="origin" type="java.lang.String"/>
+        <property column="is_active" name="isActive" type="java.lang.String"/>
+        <property column="created_by" name="createdBy" type="java.lang.Integer"/>
+        <property column="create_date" name="createDate" type="java.util.Date"/>
+        <property column="updated_by" name="updatedBy" type="java.lang.Integer"/>
+        <property column="update_date" name="updateDate" type="java.util.Date"/>
+        <property column="transunit_id" name="transUnitId" type="java.lang.Integer"/>
+        <property column="translate" name="translate" type="java.lang.String"/>
+        <property column="target_state" name="targetState" type="java.lang.String"/>
+        <property column="match_quality" name="matchQuality" type="java.lang.String"/>
+        <many-to-one class="com.teaminology.hp.bo.TermInformation"
+                     column="term_id" lazy="false" name="termInformationId" not-null="false"/>
+        <many-to-one class="com.teaminology.hp.bo.FileInfo"
+                     column="file_info_id" lazy="false" name="fileInfo" not-null="false"/>
+        <property column="target_content" name="targetContent" type="java.lang.String"/>
+        <property column="source_content" name="sourceContent" type="java.lang.String"/>
+        <set cascade="all" inverse="true" lazy="false" name="tag" sort="unsorted">
+            <key column="tag_id"/>
+            <one-to-many class="com.teaminology.hp.bo.Tag"/>
+        </set>
+        <many-to-one class="com.teaminology.hp.bo.Company"
+                     column="company_id" lazy="false" name="company" not-null="false"/>
+
+    </class>
+</hibernate-mapping>

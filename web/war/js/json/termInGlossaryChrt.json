@@ -1,0 +1,8 @@
+{
+	"termsPerYear" : [
+					{ "label":"2008" , "value":14400 },
+					{ "label":"2009" , "value":19600 },
+					{ "label":"2010" , "value":24000 },
+					{ "label":"2011" , "value":15700 }
+				]
+}
